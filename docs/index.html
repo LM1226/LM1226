@@ -3,34 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>空心菜扦插模拟实验 | 实验展示页</title>
+  <title>空心菜扦插模拟实验</title>
   <style>
     :root {
-      --green-900: #1f5f2d;
-      --green-700: #2e7d32;
-      --green-600: #3f9d44;
-      --green-100: #edf7ed;
-      --green-50: #f5faf5;
-      --text: #243127;
-      --muted: #607067;
-      --border: #dfeee0;
+      --bg: #f3f8f2;
+      --panel: rgba(255, 255, 255, 0.82);
       --card: #ffffff;
-      --shadow: 0 12px 30px rgba(24, 78, 32, 0.08);
+      --card-2: #f4fbf4;
+      --line: #dfeee0;
+      --green-900: #1c5529;
+      --green-800: #245d30;
+      --green-700: #2f7d39;
+      --green-600: #3e9647;
+      --green-500: #5ab564;
+      --green-100: #ebf7ee;
+      --text: #213327;
+      --muted: #5f6f64;
+      --shadow: 0 14px 36px rgba(27, 80, 34, 0.08);
     }
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
-      font-family: "Microsoft YaHei", "PingFang SC", "微软雅黑", sans-serif;
+      font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(129, 210, 141, 0.18), transparent 30%),
+        linear-gradient(180deg, #f7fbf7 0%, var(--bg) 100%);
       color: var(--text);
-      background: linear-gradient(180deg, #f1f8f1 0%, #edf5ef 100%);
     }
 
+    a { text-decoration: none; }
+
     .container {
-      max-width: 1100px;
+      max-width: 1160px;
       margin: 0 auto;
-      padding: 32px 20px 60px;
+      padding: 26px 20px 60px;
     }
 
     .topbar {
@@ -38,15 +48,15 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 18px 24px;
-      background: rgba(255,255,255,0.76);
-      border: 1px solid var(--border);
+      padding: 16px 22px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid var(--line);
       border-radius: 18px;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       position: sticky;
       top: 12px;
-      z-index: 10;
+      z-index: 30;
     }
 
     .brand {
@@ -55,88 +65,100 @@
       gap: 12px;
       font-weight: 700;
       color: var(--green-900);
-      font-size: 1.05rem;
+      letter-spacing: 0.02em;
     }
 
     .brand-badge {
       width: 42px;
       height: 42px;
-      border-radius: 12px;
       display: grid;
       place-items: center;
       background: linear-gradient(135deg, var(--green-700), var(--green-600));
+      border-radius: 12px;
       color: white;
-      font-size: 1.4rem;
-      box-shadow: 0 10px 20px rgba(62, 132, 67, 0.25);
+      box-shadow: 0 10px 26px rgba(59, 136, 68, 0.28);
+      font-size: 1.3rem;
     }
 
-    .topbar .tag {
-      font-size: 0.8rem;
-      color: var(--green-700);
-      background: var(--green-100);
-      border: 1px solid #d6efdb;
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 8px 12px;
       border-radius: 999px;
+      background: var(--green-100);
+      color: var(--green-800);
+      font-size: 0.78rem;
+      border: 1px solid #dbeee0;
+      font-weight: 700;
     }
 
     .hero {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
       gap: 28px;
-      padding: 42px 0 30px;
+      padding-top: 30px;
       align-items: center;
     }
 
-    .hero-copy {
-      background: rgba(255,255,255,0.72);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 32px 28px;
+    .hero-copy,
+    .hero-visual,
+    .panel,
+    .feature,
+    .summary-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
       box-shadow: var(--shadow);
+      border-radius: 26px;
+    }
+
+    .hero-copy {
+      padding: 34px 30px;
     }
 
     .eyebrow {
       display: inline-block;
-      padding: 7px 12px;
-      background: var(--green-100);
-      color: var(--green-700);
-      border: 1px solid #d7eee0;
-      border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
+      color: var(--green-800);
       text-transform: uppercase;
+      background: var(--green-100);
+      border: 1px solid #d9efd9;
+      border-radius: 999px;
+      padding: 8px 12px;
       margin-bottom: 18px;
     }
 
     h1 {
       margin: 0 0 16px;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.2;
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+      line-height: 1.15;
       color: var(--green-900);
+      letter-spacing: 0.02em;
     }
 
-    .hero-copy p {
-      margin: 0 0 18px;
-      line-height: 1.8;
-      font-size: 1.02rem;
+    .subtitle {
+      margin: 0;
       color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.04rem;
     }
 
-    .cta-row {
+    .btn-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 18px;
+      gap: 16px;
+      margin-top: 26px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 22px;
-      border-radius: 12px;
-      text-decoration: none;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 14px;
       font-weight: 700;
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
@@ -148,49 +170,58 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--green-700), var(--green-600));
       color: white;
-      box-shadow: 0 14px 24px rgba(53, 118, 61, 0.2);
+      box-shadow: 0 15px 28px rgba(40, 109, 54, 0.25);
     }
 
     .btn-secondary {
       background: white;
       color: var(--green-700);
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
     }
 
     .hero-visual {
-      background: linear-gradient(180deg, #f4fbf5 0%, #eaf4ea 100%);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      min-height: 320px;
-      padding: 24px;
-      box-shadow: var(--shadow);
+      min-height: 360px;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 22px;
+      background: linear-gradient(180deg, #f4fbf4 0%, #eaf6ec 100%);
     }
 
-    .plant-card {
-      width: 100%;
-      max-width: 320px;
+    .plant-window {
+      width: min(100%, 360px);
+      min-height: 280px;
       background: rgba(255,255,255,0.8);
-      border: 1px solid #dfe9e1;
-      border-radius: 18px;
-      padding: 22px 18px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+      border: 1px solid #dfece1;
+      border-radius: 22px;
+      padding: 18px 20px 14px;
+      position: relative;
     }
 
-    .plant-header {
+    .window-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
-      color: var(--green-700);
+      margin-bottom: 16px;
+      color: var(--green-800);
       font-weight: 700;
     }
 
-    .plant-show {
+    .dot-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(61, 120, 67, 0.2);
+    }
+
+    .plant-scene {
       position: relative;
-      height: 180px;
+      height: 200px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -198,86 +229,90 @@
 
     .stem {
       position: absolute;
-      bottom: 12px;
+      bottom: 18px;
       width: 6px;
-      height: 92px;
-      background: linear-gradient(180deg, #7ebf70, #3d8d3d);
+      height: 110px;
       border-radius: 999px;
+      background: linear-gradient(180deg, #7ec57d, #3a8f45);
     }
 
     .leaf {
       position: absolute;
-      bottom: 88px;
-      width: 38px;
+      width: 42px;
       height: 18px;
-      background: linear-gradient(135deg, #8ad18d, #76bf76);
+      background: linear-gradient(135deg, #9cd394, #70bd70);
       border-radius: 50% 50% 40% 60%;
-      transform-origin: center bottom;
+      bottom: 110px;
     }
 
-    .leaf:nth-child(2) { left: 70px; transform: rotate(-18deg); }
-    .leaf:nth-child(3) { right: 70px; transform: rotate(18deg); }
-    .leaf:nth-child(4) { left: 102px; bottom: 118px; transform: rotate(-36deg); }
-    .leaf:nth-child(5) { right: 102px; bottom: 118px; transform: rotate(36deg); }
+    .leaf.l1 { left: 78px; transform: rotate(-18deg); }
+    .leaf.l2 { right: 78px; transform: rotate(18deg); }
+    .leaf.l3 { left: 110px; bottom: 138px; transform: rotate(-38deg); }
+    .leaf.l4 { right: 110px; bottom: 138px; transform: rotate(38deg); }
 
-    .root-block {
+    .roots {
       position: absolute;
       bottom: 0;
-      width: 170px;
-      height: 34px;
+      width: 180px;
+      height: 40px;
       display: flex;
-      justify-content: center;
       align-items: flex-end;
-      gap: 4px;
+      justify-content: center;
+      gap: 5px;
     }
 
     .root {
       width: 3px;
-      height: 26px;
-      border-radius: 6px 6px 0 0;
-      background: linear-gradient(180deg, #af8263, #88644d);
+      height: 28px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #b07f5f, #86614b);
     }
 
-    .meta-grid {
-      margin-top: 24px;
+    .metric-grid {
+      margin-top: 26px;
       display: grid;
-      grid-template-columns: repeat(3, minmax(150px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
     }
 
-    .info-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
+    .summary-card {
       padding: 20px 18px;
     }
 
-    .info-card .label {
-      font-size: 0.8rem;
+    .summary-card .label {
+      font-size: 0.82rem;
       color: var(--muted);
       margin-bottom: 10px;
     }
 
-    .info-card .value {
-      font-size: clamp(1.3rem, 2vw, 2rem);
+    .summary-card .value {
+      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
       font-weight: 800;
-      color: var(--green-800, var(--green-700));
+      color: var(--green-800);
+      letter-spacing: 0.02em;
     }
 
     .section {
-      margin-top: 28px;
-      background: rgba(255,255,255,0.74);
-      border: 1px solid var(--border);
-      border-radius: 22px;
+      margin-top: 30px;
+      padding: 28px 28px 24px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--line);
+      border-radius: 24px;
       box-shadow: var(--shadow);
-      padding: 28px;
     }
 
-    .section h2 {
-      margin: 0 0 18px;
-      color: var(--green-900);
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      margin: 0;
       font-size: clamp(1.45rem, 2vw, 2rem);
+      color: var(--green-900);
     }
 
     .feature-grid {
@@ -286,40 +321,38 @@
       gap: 18px;
     }
 
-    .feature-item {
-      background: var(--green-50);
-      border: 1px solid #dfece0;
-      border-radius: 18px;
-      padding: 18px 16px;
+    .feature {
+      padding: 20px 18px;
+      background: linear-gradient(180deg, #f9fdf9 0%, white 100%);
     }
 
-    .feature-item .icon {
+    .feature-icon {
       width: 48px;
       height: 48px;
       display: grid;
       place-items: center;
       border-radius: 14px;
-      background: white;
+      background: var(--green-100);
       color: var(--green-700);
-      font-size: 1.4rem;
-      margin-bottom: 12px;
-      border: 1px solid #dfeae1;
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+      border: 1px solid #d7eed8;
     }
 
-    .feature-item h3 {
-      margin: 0 0 8px;
-      font-size: 1.08rem;
+    .feature h3 {
+      margin: 0 0 10px;
       color: var(--green-900);
+      font-size: 1.08rem;
     }
 
-    .feature-item p {
+    .feature p {
       margin: 0;
       color: var(--muted);
-      line-height: 1.75;
-      font-size: 0.95rem;
+      line-height: 1.8;
+      font-size: 0.96rem;
     }
 
-    .content-box {
+    .content-grid {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 18px;
@@ -327,20 +360,19 @@
     }
 
     .panel {
+      padding: 20px 20px 18px;
       background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px 20px;
     }
 
     .panel h3 {
       margin: 0 0 12px;
       color: var(--green-900);
+      font-size: 1.15rem;
     }
 
     .panel ul {
       margin: 0;
-      padding-left: 18px;
+      padding-left: 20px;
       color: var(--muted);
       line-height: 2;
     }
@@ -350,11 +382,12 @@
       flex-direction: column;
       justify-content: center;
       gap: 12px;
-      background: linear-gradient(135deg, #eefbe9, #f7fcf7);
+      background: linear-gradient(135deg, #eefae8 0%, #f7fcf7 100%);
     }
 
-    .mini-stat strong {
-      font-size: 2rem;
+    .big-number {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 800;
       color: var(--green-700);
       display: block;
     }
@@ -364,25 +397,76 @@
       line-height: 1.7;
     }
 
-    footer {
-      margin-top: 28px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.92rem;
-      padding-bottom: 10px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
     }
 
-    @media (max-width: 860px) {
-      .hero, .content-box, .feature-grid {
+    th, td {
+      padding: 12px 10px;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.96rem;
+    }
+
+    th {
+      background: #ecf8ee;
+      color: var(--green-900);
+      font-weight: 700;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    .highlight-box {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--green-600);
+      border-radius: 14px;
+      background: linear-gradient(90deg, rgba(106, 184, 111, 0.08), rgba(255,255,255,0.9));
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.94rem;
+      padding-top: 22px;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .content-grid,
+      .feature-grid {
         grid-template-columns: 1fr;
       }
 
-      .meta-grid {
+      .metric-grid {
         grid-template-columns: 1fr;
       }
+    }
 
+    @media (max-width: 640px) {
       .topbar {
         flex-wrap: wrap;
+      }
+      .section,
+      .hero-copy,
+      .hero-visual {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+      .btn-row {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
       }
     }
   </style>
@@ -399,104 +483,141 @@
 
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow">虚拟实验平台</div>
-        <h1>探索 NAA 促进空心菜生根的最适浓度</h1>
-        <p>
-          通过虚拟扦插实验，了解生长素类似物 NAA 对植物插条生根的影响规律。
-          观察不同浓度下的生根率、平均根数与根长变化，分析低浓度促进和高浓度抑制的两重性。
+        <div class="eyebrow">Virtual Lab</div>
+        <h1>探索 NAA 促进空心菜插条生根的最适浓度</h1>
+        <p class="subtitle">
+          通过虚拟扦插实验，观察不同浓度NAA处理下的生根效果，理解生长素类似物的“低促高抑”规律，建立实验设计与数据分析能力。
         </p>
-        <div class="cta-row">
+        <div class="btn-row">
           <a class="btn btn-primary" href="./空心菜扦插模拟实验.html">进入实验模拟</a>
-          <a class="btn btn-secondary" href="#实验概览">了解实验概览</a>
+          <a class="btn btn-secondary" href="#实验数据">查看数据结论</a>
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="植物插条示意图">
-        <div class="plant-card">
-          <div class="plant-header">
+      <div class="hero-visual">
+        <div class="plant-window">
+          <div class="window-top">
             <span>实验状态</span>
-            <span>最佳浓度</span>
+            <div class="dot-group">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
           </div>
-          <div class="plant-show">
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
-            <div class="leaf"></div>
+          <div class="plant-scene">
+            <div class="leaf l1"></div>
+            <div class="leaf l2"></div>
+            <div class="leaf l3"></div>
+            <div class="leaf l4"></div>
             <div class="stem"></div>
-            <div class="root-block">
-              <span class="root" style="height: 22px;"></span>
-              <span class="root" style="height: 26px;"></span>
-              <span class="root" style="height: 30px;"></span>
+            <div class="roots">
               <span class="root" style="height: 18px;"></span>
               <span class="root" style="height: 24px;"></span>
+              <span class="root" style="height: 30px;"></span>
+              <span class="root" style="height: 20px;"></span>
+              <span class="root" style="height: 27px;"></span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="meta-grid" id="实验概览">
-      <div class="info-card">
+    <section class="metric-grid">
+      <div class="summary-card">
         <div class="label">实验对象</div>
         <div class="value">空心菜</div>
       </div>
-      <div class="info-card">
-        <div class="label">调节剂</div>
-        <div class="value">NAA</div>
+      <div class="summary-card">
+        <div class="label">处理因素</div>
+        <div class="value">NAA浓度</div>
       </div>
-      <div class="info-card">
+      <div class="summary-card">
         <div class="label">核心结论</div>
         <div class="value">低促高抑</div>
       </div>
     </section>
 
     <section class="section">
-      <h2>实验亮点</h2>
+      <div class="section-header">
+        <h2 class="section-title">实验亮点</h2>
+      </div>
       <div class="feature-grid">
-        <div class="feature-item">
-          <div class="icon">📊</div>
-          <h3>浓度对照设计</h3>
-          <p>设置 0、50、100、200、400、800 mg/L 六种浓度，直观比较���同处理组效果差异。</p>
+        <div class="feature">
+          <div class="feature-icon">📊</div>
+          <h3>多浓度对照</h3>
+          <p>设置 0、50、100、200、400、800 mg/L 六个梯度，便于比较不同处理下生根效果的差异。</p>
         </div>
-        <div class="feature-item">
-          <div class="icon">🌿</div>
-          <h3>生根指标分析</h3>
-          <p>通过生根率、平均生根数、平均根长三个指标，帮助学生建立实验数据分析思路。</p>
+        <div class="feature">
+          <div class="feature-icon">🌿</div>
+          <h3>指标全面</h3>
+          <p>通过生根率、平均生根数、平均根长三项指标，系统分析插条生根能力及发展趋势。</p>
         </div>
-        <div class="feature-item">
-          <div class="icon">🧠</div>
-          <h3>概念迁移训练</h3>
-          <p>帮助学生理解“生长素类似物具有两重性”，并能将理论知识和实验现象结合起来。</p>
+        <div class="feature">
+          <div class="feature-icon">🧠</div>
+          <h3>概念迁移</h3>
+          <p>帮助学生理解“生长素类似物对植物生根具有两重性”，并能解释实验现象背后的生理机制。</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <h2>实验思路</h2>
-      <div class="content-box">
+      <div class="section-header">
+        <h2 class="section-title">实验流程</h2>
+      </div>
+      <div class="content-grid">
         <div class="panel">
-          <h3>核心问题</h3>
+          <h3>操作步骤</h3>
           <ul>
-            <li>NAA 浓度与插条生根之间存在怎样的关系？</li>
-            <li>哪一浓度处理最有利于空心菜生根？</li>
-            <li>为何高浓度NAA会抑制生根？</li>
+            <li>选取生长健壮、无病虫害的空心菜插条。</li>
+            <li>配制不同浓度 NAA 溶液并浸泡插条基部。</li>
+            <li>将插条插入沙床，保持适宜温度和湿度。</li>
+            <li>经过一段时间培养后观察生根情况并记录数据。</li>
+            <li>分析不同浓度下生根率和根长变化。</li>
           </ul>
         </div>
         <div class="panel mini-stat">
           <div>
-            <strong>100 mg/L</strong>
-            <span>最优生根浓度示范值</span>
+            <span class="big-number">100 mg/L</span>
+            <span>模拟中最优生根浓度</span>
           </div>
           <div>
-            <strong>7.8 条</strong>
-            <span>平均生根数（模拟结果）</span>
+            <span class="big-number">7.8 条</span>
+            <span>平均生根数（示范值）</span>
           </div>
         </div>
       </div>
     </section>
 
+    <section class="section" id="实验数据">
+      <div class="section-header">
+        <h2 class="section-title">典型实验数据</h2>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>NAA浓度</th>
+            <th>生根率</th>
+            <th>平均生根数</th>
+            <th>平均根长</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>0 mg/L</td><td>65%</td><td>3.2 条</td><td>1.8 cm</td></tr>
+          <tr><td>50 mg/L</td><td>82%</td><td>5.6 条</td><td>3.1 cm</td></tr>
+          <tr><td>100 mg/L</td><td>90%</td><td>7.8 条</td><td>4.2 cm</td></tr>
+          <tr><td>200 mg/L</td><td>85%</td><td>6.5 条</td><td>3.5 cm</td></tr>
+          <tr><td>400 mg/L</td><td>55%</td><td>2.1 条</td><td>1.2 cm</td></tr>
+          <tr><td>800 mg/L</td><td>20%</td><td>0.8 条</td><td>0.5 cm</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        实验结论：低浓度NAA能够促进空心菜插条生根，且在一定范围内，随着浓度增加，促进作用增强；但超过最适浓度后，生根率和根数会明显下降，表现出生长素类似物的双重作用。
+      </div>
+    </section>
+
     <footer>
-      本站用于展示与学习，点击上方“进入实验模拟”立即开始探索。
+      本站用于生物实验学习与展示，点击上方“进入实验模拟”即可开始虚拟探究。
     </footer>
   </div>
 </body>
