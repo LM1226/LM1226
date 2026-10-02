@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>空心菜扦插模拟实验</title>
+  <title>空心菜扦插模拟实验 | 实验展示页</title>
+  <meta name="description" content="虚拟实验：探索NAA促进空心菜插条生根的最适浓度" />
   <style>
     :root {
-      --bg: #f2f8f2;
-      --panel: rgba(255,255,255,0.8);
+      --bg: #f4f9f4;
+      --panel: rgba(255,255,255,0.82);
       --panel-solid: #ffffff;
-      --panel-soft: #f6fbf6;
-      --line: #dfeee0;
-      --green-900: #1c5829;
-      --green-800: #236d30;
-      --green-700: #2f7f39;
-      --green-600: #3f8d49;
-      --green-500: #5bb56b;
-      --green-100: #edf9ee;
+      --line: #dfeee1;
+      --green-900: #1d572b;
+      --green-800: #236c30;
+      --green-700: #2d7e38;
+      --green-600: #3d8d46;
+      --green-500: #5dbb68;
+      --green-100: #edf9ef;
       --text: #213528;
-      --muted: #5f6f62;
-      --shadow: 0 16px 38px rgba(23, 71, 30, 0.08);
-      --shadow-soft: 0 10px 28px rgba(23, 71, 30, 0.05);
+      --muted: #5f6f63;
+      --shadow: 0 18px 42px rgba(25, 79, 32, 0.08);
+      --shadow-soft: 0 10px 24px rgba(25, 79, 32, 0.05);
     }
 
     * { box-sizing: border-box; }
@@ -30,31 +30,31 @@
       font-family: "Microsoft YaHei", "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top left, rgba(138, 214, 149, 0.18), transparent 30%),
-        linear-gradient(180deg, #f8fbf8 0%, var(--bg) 100%);
+        radial-gradient(circle at top left, rgba(130, 209, 143, 0.2), transparent 28%),
+        linear-gradient(180deg, #f9fcf9 0%, var(--bg) 100%);
     }
     a { text-decoration: none; }
 
     .container {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 22px 20px 56px;
+      padding: 26px 20px 54px;
     }
 
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
       padding: 16px 22px;
       background: rgba(255,255,255,0.7);
       border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow-soft);
+      border-radius: 18px;
       backdrop-filter: blur(10px);
+      box-shadow: var(--shadow-soft);
       position: sticky;
       top: 12px;
-      z-index: 10;
+      z-index: 20;
     }
     .brand {
       display: flex;
@@ -67,30 +67,33 @@
     .brand-badge {
       width: 42px;
       height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--green-700), var(--green-600));
       display: grid;
       place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--green-700), var(--green-600));
       color: white;
-      box-shadow: 0 12px 24px rgba(46, 109, 56, 0.22);
-      font-size: 1.3rem;
+      font-size: 1.28rem;
+      box-shadow: 0 12px 26px rgba(54, 127, 63, 0.25);
     }
     .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid #d9eed9;
       background: var(--green-100);
       color: var(--green-800);
-      border: 1px solid #d9eed9;
-      border-radius: 999px;
-      padding: 8px 12px;
       font-size: 0.78rem;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.18fr 0.82fr;
+      grid-template-columns: 1.12fr 0.88fr;
       gap: 28px;
       align-items: center;
-      padding-top: 28px;
+      padding-top: 32px;
     }
     .hero-copy,
     .hero-visual,
@@ -99,7 +102,7 @@
     .stats-card {
       background: var(--panel);
       border: 1px solid var(--line);
-      border-radius: 26px;
+      border-radius: 28px;
       box-shadow: var(--shadow);
     }
     .hero-copy {
@@ -107,21 +110,21 @@
     }
     .eyebrow {
       display: inline-block;
-      padding: 8px 14px;
+      padding: 8px 12px;
+      margin-bottom: 18px;
       border-radius: 999px;
       background: var(--green-100);
-      border: 1px solid #d9efd9;
       color: var(--green-800);
-      font-size: 0.76rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      border: 1px solid #d9eed8;
       font-weight: 800;
-      margin-bottom: 18px;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
     h1 {
       margin: 0 0 16px;
-      font-size: clamp(2.2rem, 4vw, 3.5rem);
-      line-height: 1.1;
+      font-size: clamp(2.1rem, 4vw, 3.6rem);
+      line-height: 1.12;
       color: var(--green-900);
       letter-spacing: 0.02em;
     }
@@ -135,15 +138,15 @@
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 26px;
+      margin-top: 28px;
     }
     .btn {
-      min-height: 52px;
-      padding: 0 22px;
-      border-radius: 14px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 14px;
       font-weight: 800;
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
@@ -151,7 +154,7 @@
     .btn-primary {
       background: linear-gradient(135deg, var(--green-700), var(--green-600));
       color: white;
-      box-shadow: 0 16px 28px rgba(43, 111, 54, 0.25);
+      box-shadow: 0 16px 28px rgba(40, 107, 52, 0.22);
     }
     .btn-secondary {
       background: white;
@@ -160,29 +163,29 @@
     }
 
     .hero-visual {
-      min-height: 360px;
+      min-height: 370px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 22px;
-      background: linear-gradient(180deg, #f4fbf4 0%, #ebf6ed 100%);
+      background: linear-gradient(180deg, #f7fcf7 0%, #ecf7ee 100%);
     }
     .plant-window {
       width: min(100%, 360px);
-      min-height: 285px;
-      background: rgba(255,255,255,0.82);
+      min-height: 290px;
+      background: rgba(255,255,255,0.84);
       border: 1px solid #dfece1;
       border-radius: 22px;
-      padding: 18px 18px 12px;
+      padding: 18px 18px 14px;
       position: relative;
     }
     .window-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
-      font-weight: 700;
+      margin-bottom: 14px;
       color: var(--green-800);
+      font-weight: 700;
     }
     .dot-group {
       display: flex;
@@ -192,11 +195,11 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: rgba(66, 135, 73, 0.23);
+      background: rgba(63, 133, 71, 0.22);
     }
     .plant-scene {
       position: relative;
-      height: 200px;
+      height: 210px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -207,35 +210,35 @@
       width: 6px;
       height: 110px;
       border-radius: 999px;
-      background: linear-gradient(180deg, #83c97d, #3a8b46);
+      background: linear-gradient(180deg, #85cd80, #3a8d47);
     }
     .leaf {
       position: absolute;
       width: 42px;
       height: 18px;
-      background: linear-gradient(135deg, #9cd79f, #7cc778);
+      background: linear-gradient(135deg, #9ed8a6, #7ccf7e);
       border-radius: 50% 50% 40% 60%;
       bottom: 108px;
     }
-    .leaf.l1 { left: 78px; transform: rotate(-18deg); }
-    .leaf.l2 { right: 78px; transform: rotate(18deg); }
-    .leaf.l3 { left: 108px; bottom: 136px; transform: rotate(-38deg); }
-    .leaf.l4 { right: 108px; bottom: 136px; transform: rotate(38deg); }
+    .leaf.l1 { left: 80px; transform: rotate(-18deg); }
+    .leaf.l2 { right: 80px; transform: rotate(18deg); }
+    .leaf.l3 { left: 110px; bottom: 138px; transform: rotate(-38deg); }
+    .leaf.l4 { right: 110px; bottom: 138px; transform: rotate(38deg); }
     .roots {
       position: absolute;
       bottom: 0;
       width: 180px;
       height: 40px;
       display: flex;
-      align-items: flex-end;
       justify-content: center;
+      align-items: flex-end;
       gap: 5px;
     }
     .root {
       width: 3px;
       height: 28px;
       border-radius: 999px;
-      background: linear-gradient(180deg, #b88463, #82614a);
+      background: linear-gradient(180deg, #b88364, #7f624e);
     }
 
     .stats-grid {
@@ -246,33 +249,33 @@
     }
     .stats-card {
       padding: 20px 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,251,246,0.95));
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,251,246,0.96));
     }
     .stats-card .label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
       margin-bottom: 10px;
     }
     .stats-card .value {
-      font-size: clamp(1.5rem, 2.1vw, 2.2rem);
+      font-size: clamp(1.5rem, 2.3vw, 2.2rem);
       font-weight: 800;
       color: var(--green-800);
     }
 
     .section {
-      margin-top: 28px;
+      margin-top: 30px;
       padding: 28px;
     }
     .section-head {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 18px;
       margin-bottom: 18px;
     }
     .section-title {
       margin: 0;
-      font-size: clamp(1.45rem, 2vw, 2rem);
+      font-size: clamp(1.45rem, 2vw, 2.1rem);
       color: var(--green-900);
     }
 
@@ -292,7 +295,7 @@
       place-items: center;
       border-radius: 14px;
       background: var(--green-100);
-      border: 1px solid #d9eed9;
+      border: 1px solid #d9eed8;
       color: var(--green-700);
       font-size: 1.5rem;
       margin-bottom: 12px;
@@ -300,7 +303,7 @@
     .card h3 {
       margin: 0 0 10px;
       color: var(--green-900);
-      font-size: 1.1rem;
+      font-size: 1.08rem;
     }
     .card p {
       margin: 0;
@@ -311,9 +314,9 @@
 
     .content-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.12fr 0.88fr;
       gap: 18px;
-      margin-top: 12px;
+      margin-top: 14px;
     }
     .panel {
       background: white;
@@ -337,14 +340,13 @@
       flex-direction: column;
       justify-content: center;
       gap: 12px;
-      background: linear-gradient(135deg, #edf9ee 0%, #f6fbf6 100%);
+      background: linear-gradient(135deg, #eefaf0 0%, #f7fcf7 100%);
     }
     .big-number {
       display: block;
-      font-size: clamp(2.1rem, 3vw, 2.8rem);
+      font-size: clamp(2rem, 3vw, 2.8rem);
       font-weight: 800;
       color: var(--green-700);
-      letter-spacing: 0.02em;
     }
     .mini-stat span {
       color: var(--muted);
@@ -357,7 +359,7 @@
       margin-top: 14px;
       background: white;
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
     }
     th, td {
@@ -376,7 +378,7 @@
     .conclusion {
       margin-top: 18px;
       padding: 18px 20px;
-      background: linear-gradient(90deg, rgba(96, 177, 105, 0.08), rgba(255,255,255,0.9));
+      background: linear-gradient(90deg, rgba(106, 184, 111, 0.08), rgba(255,255,255,0.9));
       border-left: 4px solid var(--green-600);
       border-radius: 14px;
       color: var(--text);
@@ -388,22 +390,23 @@
       text-align: center;
       color: var(--muted);
       font-size: 0.94rem;
-      padding-top: 18px;
+      padding-top: 20px;
     }
 
     @media (max-width: 900px) {
       .hero,
-      .content-grid,
+      .stats-grid,
       .feature-grid,
-      .stats-grid {
+      .content-grid {
         grid-template-columns: 1fr;
       }
     }
+
     @media (max-width: 640px) {
       .topbar { flex-wrap: wrap; }
-      .section, .hero-copy, .hero-visual { padding-left: 18px; padding-right: 18px; }
       .btn-row { flex-direction: column; }
       .btn { width: 100%; }
+      .section, .hero-copy, .hero-visual { padding-left: 18px; padding-right: 18px; }
     }
   </style>
 </head>
@@ -414,19 +417,19 @@
         <div class="brand-badge">🌱</div>
         <span>空心菜扦插模拟实验</span>
       </div>
-      <div class="tag">高中生物 · 预实验模拟</div>
+      <div class="tag">高中生物 · 实验展示页</div>
     </div>
 
     <section class="hero">
       <div class="hero-copy">
         <div class="eyebrow">Virtual Lab</div>
-        <h1>探究 NAA 对空心菜插条生根的最适浓度</h1>
+        <h1>探索 NAA 促进空心菜插条生根的最适浓度</h1>
         <p class="subtitle">
-          本实验通过虚拟模拟方式展示不同浓度 NAA 对插条生根的影响规律，帮助学生理解植物生长调节剂的作用特点，并从数据中建立“低浓度促进、高浓度抑制”的认知。
+          通过虚拟实验模拟，观察不同浓度 NAA 对空心菜插条生根的影响，了解生长素类似物在植物生根中的“低促高抑”规律，并结合数据分析得出科学结论。
         </p>
         <div class="btn-row">
-          <a class="btn btn-primary" href="./空心菜扦插模拟实验.html">进入实验模拟</a>
-          <a class="btn btn-secondary" href="#实验数据">查看实验数据</a>
+          <a href="./空心菜扦插模拟实验.html" class="btn btn-primary">进入实验模拟</a>
+          <a href="#实验数据" class="btn btn-secondary">查看数据结论</a>
         </div>
       </div>
 
@@ -448,10 +451,10 @@
             <div class="stem"></div>
             <div class="roots">
               <span class="root" style="height: 18px;"></span>
-              <span class="root" style="height: 24px;"></span>
-              <span class="root" style="height: 30px;"></span>
-              <span class="root" style="height: 20px;"></span>
               <span class="root" style="height: 26px;"></span>
+              <span class="root" style="height: 32px;"></span>
+              <span class="root" style="height: 22px;"></span>
+              <span class="root" style="height: 28px;"></span>
             </div>
           </div>
         </div>
@@ -464,8 +467,8 @@
         <div class="value">空心菜</div>
       </div>
       <div class="stats-card">
-        <div class="label">调节剂</div>
-        <div class="value">NAA</div>
+        <div class="label">处理因素</div>
+        <div class="value">NAA浓度</div>
       </div>
       <div class="stats-card">
         <div class="label">核心规律</div>
@@ -480,18 +483,18 @@
       <div class="feature-grid">
         <div class="card">
           <div class="card-icon">📊</div>
-          <h3>多浓度控制</h3>
-          <p>设计 0、50、100、200、400、800 mg/L 六种浓度，对比不同处理下的生根效果差异。</p>
+          <h3>多浓度设计</h3>
+          <p>设置 0、50、100、200、400、800 mg/L 六个浓度梯度，清晰比较不同处理对插条生根的差异。</p>
         </div>
         <div class="card">
           <div class="card-icon">🌿</div>
-          <h3>指标系统</h3>
-          <p>从生根率、平均生根数、平均根长三个维度，全面评估插条生根能力。</p>
+          <h3>指标完整</h3>
+          <p>从生根率、平均生根数和平均根长三个方面，对生根状况进行全面比较与分析。</p>
         </div>
         <div class="card">
           <div class="card-icon">🧠</div>
-          <h3>认知提升</h3>
-          <p>通过实验模拟有效理解“最适浓度”“抑制阈值”和生长素类似物的两重性。</p>
+          <h3>理论迁移</h3>
+          <p>帮助学生理解生长素类似物的“双重性”，并把实验现象与理论知识有效联系起来。</p>
         </div>
       </div>
     </section>
@@ -502,13 +505,13 @@
       </div>
       <div class="content-grid">
         <div class="panel">
-          <h3>一、实验步骤</h3>
+          <h3>操作步骤</h3>
           <ul>
-            <li>选择生长健壮、无病虫害的空心菜插条。</li>
+            <li>选取生长健壮无病虫害的空心菜插条。</li>
             <li>配制不同浓度的 NAA 溶液并处理插条基部。</li>
-            <li>将处理后的插条插入沙床或基质中。</li>
-            <li>保持适宜的温度、湿度和光照条件。</li>
-            <li>观察并记录生根情况，分析数据结果。</li>
+            <li>将插条插入沙床或基质中，保持适宜环境。</li>
+            <li>观察并记录生根情况，统计相关指标。</li>
+            <li>依据实验数据分析最适浓度与抑制阈值。</li>
           </ul>
         </div>
         <div class="panel mini-stat">
@@ -548,12 +551,12 @@
       </table>
 
       <div class="conclusion">
-        实验结论：低浓度NAA能够促进空心菜插条生根，且在一定范围内促进作用随着浓度升高而增强；但当浓度超过最适范围后，生根率和根数会明显下降，表现出生长素类似物的两重性。
+        实验结论：低浓度 NAA 能够促进空心菜插条生根，且在一定范围内，促进作用随着浓度增大而增强；但是超过最适浓度后，生根率和根数明显下降，表现出生长素类似物的两重性。
       </div>
     </section>
 
     <footer>
-      本站用于生物实验学习与展示，点击上方“进入实验模拟”立即开始虚拟探究。
+      本站用于生物实验学习与展示，点击上方“进入实验模拟”即可开始虚拟探究。
     </footer>
   </div>
 </body>
