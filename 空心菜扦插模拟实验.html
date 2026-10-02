@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虚拟实验：NAA促进空心菜插条生根的最适浓度</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "微软雅黑", sans-serif; }
+        body { background: #f0f7f0; color: #333; line-height: 1.6; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 20px 0; background: #2e7d32; color: white; border-radius: 8px; margin-bottom: 20px; }
+        header h1 { font-size: 24px; margin-bottom: 5px; }
+        header p { font-size: 14px; opacity: 0.9; }
+        
+        .section { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .section h2 { color: #2e7d32; font-size: 18px; margin-bottom: 12px; border-left: 4px solid #2e7d32; padding-left: 10px; }
+        
+        .concentration-group { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .concentration-btn { 
+            flex: 1; min-width: 120px; padding: 10px; border: 2px solid #a5d6a7; 
+            background: #f1f8e9; border-radius: 6px; cursor: pointer; text-align: center;
+            transition: all 0.3s;
+        }
+        .concentration-btn:hover { border-color: #2e7d32; }
+        .concentration-btn.active { background: #2e7d32; color: white; border-color: #2e7d32; }
+        
+        .btn-primary {
+            display: block; width: 100%; max-width: 300px; margin: 20px auto;
+            padding: 12px 24px; background: #2e7d32; color: white; border: none;
+            border-radius: 6px; font-size: 16px; cursor: pointer; transition: background 0.3s;
+        }
+        .btn-primary:hover { background: #1b5e20; }
+        .btn-primary:disabled { background: #9e9e9e; cursor: not-allowed; }
+        
+        .process-bar {
+            height: 8px; background: #e0e0e0; border-radius: 4px; margin: 15px 0; overflow: hidden;
+        }
+        .process-fill {
+            height: 100%; width: 0%; background: #4caf50; transition: width 0.5s;
+        }
+        .process-text { text-align: center; color: #666; font-size: 14px; }
+        
+        .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px; }
+        @media (max-width: 768px) { .result-grid { grid-template-columns: 1fr; } }
+        
+        .result-img {
+            height: 200px; border: 1px solid #e0e0e0; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center; background: #fafafa;
+            font-size: 14px; color: #999; position: relative; overflow: hidden;
+        }
+        .root-display { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); }
+        .stem { width: 4px; height: 80px; background: #558b2f; margin: 0 auto; }
+        .roots { display: flex; justify-content: center; gap: 2px; }
+        .root { width: 2px; background: #8d6e63; border-radius: 1px; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #e0e0e0; padding: 8px; text-align: center; font-size: 14px; }
+        th { background: #e8f5e9; color: #2e7d32; }
+        
+        .chart-box { width: 100%; height: 220px; margin-top: 15px; }
+        canvas { width: 100%; height: 100%; }
+        
+        .conclusion {
+            background: #f1f8e9; border-left: 4px solid #4caf50; padding: 12px;
+            margin-top: 15px; border-radius: 4px; font-size: 14px;
+        }
+        .tips { font-size: 13px; color: #666; margin-top: 10px; }
+        .tips li { margin-left: 20px; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>虚拟实验：探索NAA促进空心菜插条生根的最适浓度</h1>
+            <p>人教版高中生物选择性必修一 · 广西本地化适配 · 预实验模拟</p>
+        </header>
+
+        <div class="section">
+            <h2>实验原理</h2>
+            <p>生长素类似物NAA（萘乙酸）对植物插条生根的作用具有两重性：低浓度促进生根，浓度过高则抑制生根甚至导致插条坏死。本实验模拟广西秋季空心菜嫩枝扦插，探究NAA促进生根的适宜浓度范围。</p>
+        </div>
+
+        <div class="section">
+            <h2>第一步：选择NAA浓度</h2>
+            <div class="concentration-group">
+                <div class="concentration-btn active" data-conc="0">0 mg/L<br><small>对照组</small></div>
+                <div class="concentration-btn" data-conc="50">50 mg/L</div>
+                <div class="concentration-btn" data-conc="100">100 mg/L</div>
+                <div class="concentration-btn" data-conc="200">200 mg/L</div>
+                <div class="concentration-btn" data-conc="400">400 mg/L</div>
+                <div class="concentration-btn" data-conc="800">800 mg/L</div>
+            </div>
+            <button class="btn-primary" id="startBtn">开始模拟实验</button>
+        </div>
+
+        <div class="section" id="processSection" style="display: none;">
+            <h2>第二步：实验操作模拟</h2>
+            <div class="process-bar"><div class="process-fill" id="processFill"></div></div>
+            <div class="process-text" id="processText">准备插条中...</div>
+        </div>
+
+        <div class="section" id="resultSection" style="display: none;">
+            <h2>第三步：观察结果与数据分析</h2>
+            <div class="result-grid">
+                <div>
+                    <h4 style="margin-bottom: 8px; font-size: 15px;">生根效果示意</h4>
+                    <div class="result-img" id="resultImg">
+                        <div class="root-display">
+                            <div class="stem"></div>
+                            <div class="roots" id="roots"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 8px; font-size: 15px;">实验数据记录</h4>
+                    <table>
+                        <tr><th>指标</th><th>数值</th></tr>
+                        <tr><td>NAA浓度</td><td id="dataConc">0 mg/L</td></tr>
+                        <tr><td>生根率</td><td id="dataRate">-</td></tr>
+                        <tr><td>平均生根数</td><td id="dataNum">-</td></tr>
+                        <tr><td>平均根长</td><td id="dataLen">-</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <h4 style="margin-top: 20px; font-size: 15px;">浓度-生根数关系曲线</h4>
+            <div class="chart-box">
+                <canvas id="chartCanvas"></canvas>
+            </div>
+
+            <div class="conclusion" id="conclusion">
+                <strong>实验结论：</strong><span id="conclusionText"></span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>广西秋季实验注意事项</h2>
+            <ul class="tips">
+                <li>插条采集与处理宜在清晨或傍晚进行，避免高温失水萎蔫</li>
+                <li>扦插后置于遮阴通风处，避免秋季强光直射和暴雨冲刷</li>
+                <li>严格控制无关变量：插条粗细、浸泡时间、扦插深度保持一致</li>
+                <li>生产施用生长调节剂需避开正午高温，防止药害</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // 实验数据（基于真实实验规律设定）
+        const expData = {
+            0:   { rate: 65, num: 3.2, len: 1.8 },
+            50:  { rate: 82, num: 5.6, len: 3.1 },
+            100: { rate: 90, num: 7.8, len: 4.2 },
+            200: { rate: 85, num: 6.5, len: 3.5 },
+            400: { rate: 55, num: 2.1, len: 1.2 },
+            800: { rate: 20, num: 0.8, len: 0.5 }
+        };
+
+        let currentConc = 0;
+        let testedConc = [0]; // 已测试的浓度
+
+        // 浓度选择
+        document.querySelectorAll('.concentration-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.concentration-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentConc = parseInt(btn.dataset.conc);
+            });
+        });
+
+        // 开始实验
+        const startBtn = document.getElementById('startBtn');
+        const processSection = document.getElementById('processSection');
+        const resultSection = document.getElementById('resultSection');
+        const processFill = document.getElementById('processFill');
+        const processText = document.getElementById('processText');
+
+        startBtn.addEventListener('click', () => {
+            startBtn.disabled = true;
+            processSection.style.display = 'block';
+            resultSection.style.display = 'none';
+            
+            const steps = [
+                { text: '剪取空心菜嫩枝，制备插条...', progress: 20 },
+                { text: '配制对应浓度NAA溶液...', progress: 40 },
+                { text: '浸泡插条基部2小时...', progress: 60 },
+                { text: '扦插至沙床，遮阴培养...', progress: 80 },
+                { text: '培养3天后，统计生根数据...', progress: 100 }
+            ];
+
+            let step = 0;
+            const timer = setInterval(() => {
+                if (step >= steps.length) {
+                    clearInterval(timer);
+                    showResult();
+                    startBtn.disabled = false;
+                    return;
+                }
+                processFill.style.width = steps[step].progress + '%';
+                processText.textContent = steps[step].text;
+                step++;
+            }, 600);
+        });
+
+        // 显示结果
+        function showResult() {
+            resultSection.style.display = 'block';
+            const data = expData[currentConc];
+            
+            // 更新数据
+            document.getElementById('dataConc').textContent = currentConc + ' mg/L';
+            document.getElementById('dataRate').textContent = data.rate + ' %';
+            document.getElementById('dataNum').textContent = data.num + ' 条';
+            document.getElementById('dataLen').textContent = data.len + ' cm';
+            
+            // 绘制根
+            const rootsBox = document.getElementById('roots');
+            rootsBox.innerHTML = '';
+            const rootCount = Math.round(data.num * 2);
+            for (let i = 0; i < rootCount; i++) {
+                const root = document.createElement('div');
+                root.className = 'root';
+                root.style.height = (data.len * 15 + Math.random() * 10) + 'px';
+                rootsBox.appendChild(root);
+            }
+
+            // 记录已测浓度
+            if (!testedConc.includes(currentConc)) {
+                testedConc.push(currentConc);
+                testedConc.sort((a,b) => a - b);
+            }
+
+            // 绘制曲线
+            drawChart();
+
+            // 结论
+            let conclusion = '';
+            if (currentConc === 0) conclusion = '对照组生根效果一般，低浓度NAA可显著促进生根。';
+            else if (currentConc <= 200) conclusion = `该浓度下NAA对空心菜生根有明显促进作用，其中100mg/L左右促进效果最佳。`;
+            else if (currentConc === 400) conclusion = '浓度升高，促进作用减弱，已接近抑制阈值。';
+            else conclusion = '高浓度NAA严重抑制生根，体现出生长素类似物作用的两重性。';
+            document.getElementById('conclusionText').textContent = conclusion;
+        }
+
+        // 绘制曲线图
+        function drawChart() {
+            const canvas = document.getElementById('chartCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            const w = canvas.width;
+            const h = canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+            
+            // 坐标轴
+            ctx.strokeStyle = '#999';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(50, 20);
+            ctx.lineTo(50, h - 30);
+            ctx.lineTo(w - 20, h - 30);
+            ctx.stroke();
+
+            // 刻度
+            ctx.fillStyle = '#666';
+            ctx.font = '12px sans-serif';
+            ctx.textAlign = 'center';
+            const xStep = (w - 70) / 5;
+            const concs = [0, 50, 100, 200, 400, 800];
+            concs.forEach((c, i) => {
+                const x = 50 + i * xStep;
+                ctx.fillText(c + '', x, h - 15);
+            });
+            ctx.textAlign = 'right';
+            ctx.fillText('平均生根数', 45, 30);
+
+            // 描点连线
+            ctx.strokeStyle = '#4caf50';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            let first = true;
+            testedConc.forEach(conc => {
+                const idx = concs.indexOf(conc);
+                const x = 50 + idx * xStep;
+                const y = h - 30 - (expData[conc].num / 8) * (h - 60);
+                if (first) { ctx.moveTo(x, y); first = false; }
+                else ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // 数据点
+            testedConc.forEach(conc => {
+                const idx = concs.indexOf(conc);
+                const x = 50 + idx * xStep;
+                const y = h - 30 - (expData[conc].num / 8) * (h - 60);
+                ctx.fillStyle = '#2e7d32';
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        // 响应式重绘
+        window.addEventListener('resize', () => {
+            if (resultSection.style.display === 'block') drawChart();
+        });
+    </script>
+</body>
+</html>
