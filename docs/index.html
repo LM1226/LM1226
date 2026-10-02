@@ -3,37 +3,501 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="refresh" content="0; url=./空心菜扦插模拟实验.html" />
-  <title>空心菜扦插模拟实验</title>
+  <title>空心菜扦插模拟实验 | 实验展示页</title>
   <style>
+    :root {
+      --green-900: #1f5f2d;
+      --green-700: #2e7d32;
+      --green-600: #3f9d44;
+      --green-100: #edf7ed;
+      --green-50: #f5faf5;
+      --text: #243127;
+      --muted: #607067;
+      --border: #dfeee0;
+      --card: #ffffff;
+      --shadow: 0 12px 30px rgba(24, 78, 32, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      height: 100vh;
+      font-family: "Microsoft YaHei", "PingFang SC", "微软雅黑", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f1f8f1 0%, #edf5ef 100%);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 24px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 12px;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--green-900);
+      font-size: 1.05rem;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--green-700), var(--green-600));
+      color: white;
+      font-size: 1.4rem;
+      box-shadow: 0 10px 20px rgba(62, 132, 67, 0.25);
+    }
+
+    .topbar .tag {
+      font-size: 0.8rem;
+      color: var(--green-700);
+      background: var(--green-100);
+      border: 1px solid #d6efdb;
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px;
+      padding: 42px 0 30px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 32px 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 12px;
+      background: var(--green-100);
+      color: var(--green-700);
+      border: 1px solid #d7eee0;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.2;
+      color: var(--green-900);
+    }
+
+    .hero-copy p {
+      margin: 0 0 18px;
+      line-height: 1.8;
+      font-size: 1.02rem;
+      color: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green-700), var(--green-600));
+      color: white;
+      box-shadow: 0 14px 24px rgba(53, 118, 61, 0.2);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--green-700);
+      border: 1px solid var(--border);
+    }
+
+    .hero-visual {
+      background: linear-gradient(180deg, #f4fbf5 0%, #eaf4ea 100%);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      min-height: 320px;
+      padding: 24px;
+      box-shadow: var(--shadow);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f0f7f0;
-      color: #2e7d32;
-      font-family: "微软雅黑", sans-serif;
-      text-align: center;
     }
-    .box {
+
+    .plant-card {
+      width: 100%;
+      max-width: 320px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid #dfe9e1;
+      border-radius: 18px;
+      padding: 22px 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .plant-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      color: var(--green-700);
+      font-weight: 700;
+    }
+
+    .plant-show {
+      position: relative;
+      height: 180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .stem {
+      position: absolute;
+      bottom: 12px;
+      width: 6px;
+      height: 92px;
+      background: linear-gradient(180deg, #7ebf70, #3d8d3d);
+      border-radius: 999px;
+    }
+
+    .leaf {
+      position: absolute;
+      bottom: 88px;
+      width: 38px;
+      height: 18px;
+      background: linear-gradient(135deg, #8ad18d, #76bf76);
+      border-radius: 50% 50% 40% 60%;
+      transform-origin: center bottom;
+    }
+
+    .leaf:nth-child(2) { left: 70px; transform: rotate(-18deg); }
+    .leaf:nth-child(3) { right: 70px; transform: rotate(18deg); }
+    .leaf:nth-child(4) { left: 102px; bottom: 118px; transform: rotate(-36deg); }
+    .leaf:nth-child(5) { right: 102px; bottom: 118px; transform: rotate(36deg); }
+
+    .root-block {
+      position: absolute;
+      bottom: 0;
+      width: 170px;
+      height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .root {
+      width: 3px;
+      height: 26px;
+      border-radius: 6px 6px 0 0;
+      background: linear-gradient(180deg, #af8263, #88644d);
+    }
+
+    .meta-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(150px, 1fr));
+      gap: 18px;
+    }
+
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 20px 18px;
+    }
+
+    .info-card .label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .info-card .value {
+      font-size: clamp(1.3rem, 2vw, 2rem);
+      font-weight: 800;
+      color: var(--green-800, var(--green-700));
+    }
+
+    .section {
+      margin-top: 28px;
+      background: rgba(255,255,255,0.74);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .section h2 {
+      margin: 0 0 18px;
+      color: var(--green-900);
+      font-size: clamp(1.45rem, 2vw, 2rem);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-item {
+      background: var(--green-50);
+      border: 1px solid #dfece0;
+      border-radius: 18px;
+      padding: 18px 16px;
+    }
+
+    .feature-item .icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
       background: white;
-      padding: 24px 32px;
-      border-radius: 12px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+      color: var(--green-700);
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      border: 1px solid #dfeae1;
     }
-    a {
-      color: #2e7d32;
-      text-decoration: none;
-      font-weight: bold;
+
+    .feature-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      color: var(--green-900);
+    }
+
+    .feature-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .content-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+
+    .panel h3 {
+      margin: 0 0 12px;
+      color: var(--green-900);
+    }
+
+    .panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .mini-stat {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #eefbe9, #f7fcf7);
+    }
+
+    .mini-stat strong {
+      font-size: 2rem;
+      color: var(--green-700);
+      display: block;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding-bottom: 10px;
+    }
+
+    @media (max-width: 860px) {
+      .hero, .content-box, .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-wrap: wrap;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <p>页面正在跳转中...</p>
-    <p><a href="./空心菜扦插模拟实验.html">点击这里直接进入实验页面</a></p>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-badge">🌱</div>
+        <span>空心菜扦插模拟实验</span>
+      </div>
+      <div class="tag">高中生物 · 预实验模拟</div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">虚拟实验平台</div>
+        <h1>探索 NAA 促进空心菜生根的最适浓度</h1>
+        <p>
+          通过虚拟扦插实验，了解生长素类似物 NAA 对植物插条生根的影响规律。
+          观察不同浓度下的生根率、平均根数与根长变化，分析低浓度促进和高浓度抑制的两重性。
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="./空心菜扦插模拟实验.html">进入实验模拟</a>
+          <a class="btn btn-secondary" href="#实验概览">了解实验概览</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="植物插条示意图">
+        <div class="plant-card">
+          <div class="plant-header">
+            <span>实验状态</span>
+            <span>最佳浓度</span>
+          </div>
+          <div class="plant-show">
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="stem"></div>
+            <div class="root-block">
+              <span class="root" style="height: 22px;"></span>
+              <span class="root" style="height: 26px;"></span>
+              <span class="root" style="height: 30px;"></span>
+              <span class="root" style="height: 18px;"></span>
+              <span class="root" style="height: 24px;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="meta-grid" id="实验概览">
+      <div class="info-card">
+        <div class="label">实验对象</div>
+        <div class="value">空心菜</div>
+      </div>
+      <div class="info-card">
+        <div class="label">调节剂</div>
+        <div class="value">NAA</div>
+      </div>
+      <div class="info-card">
+        <div class="label">核心结论</div>
+        <div class="value">低促高抑</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>实验亮点</h2>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="icon">📊</div>
+          <h3>浓度对照设计</h3>
+          <p>设置 0、50、100、200、400、800 mg/L 六种浓度，直观比较���同处理组效果差异。</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon">🌿</div>
+          <h3>生根指标分析</h3>
+          <p>通过生根率、平均生根数、平均根长三个指标，帮助学生建立实验数据分析思路。</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon">🧠</div>
+          <h3>概念迁移训练</h3>
+          <p>帮助学生理解“生长素类似物具有两重性”，并能将理论知识和实验现象结合起来。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>实验思路</h2>
+      <div class="content-box">
+        <div class="panel">
+          <h3>核心问题</h3>
+          <ul>
+            <li>NAA 浓度与插条生根之间存在怎样的关系？</li>
+            <li>哪一浓度处理最有利于空心菜生根？</li>
+            <li>为何高浓度NAA会抑制生根？</li>
+          </ul>
+        </div>
+        <div class="panel mini-stat">
+          <div>
+            <strong>100 mg/L</strong>
+            <span>最优生根浓度示范值</span>
+          </div>
+          <div>
+            <strong>7.8 条</strong>
+            <span>平均生根数（模拟结果）</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      本站用于展示与学习，点击上方“进入实验模拟”立即开始探索。
+    </footer>
   </div>
 </body>
 </html>
